@@ -20,12 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-
+//#define POINTING_DEVICE_ROTATION_180
+//#define POINTING_DEVICE_INVERT_X
+//#define POINTING_DEVICE_INVERT_Y
+#define CIRQUE_PINNACLE_DIAMETER_MM 40
+#define POINTING_DEVICE_GESTURES_SCROLL_ENABLE
+#define CIRQUE_PINNACLE_CURVED_OVERLAY
+#define CIRQUE_PINNACLE_TAP_ENABLE
+#define CIRQUE_PINNACLE_SECONDARY_TAP_ENABLE
 /* Select hand configuration */
 
 //#define MASTER_LEFT
-// #define MASTER_RIGHT
-#define EE_HANDS
+#define MASTER_RIGHT
+//#define EE_HANDS
 
 #define OLED_TIMEOUT 3600000
 #define OLED_BRIGHTNESS 120
@@ -36,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_SERIAL_PD2
 
 #define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 130
+#define TAPPING_TERM 150
 #define IGNORE_MOD_TAP_INTERRUPT
 
 #undef RGBLED_NUM

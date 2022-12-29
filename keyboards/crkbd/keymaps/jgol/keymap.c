@@ -6,7 +6,8 @@ enum layers {
     _QWERTY = 0,
     _LOWER,
     _RAISE,
-    _ADJUST
+    _ADJUST,
+    _MOUSE
 };
 
 // ╭─────────────╮
@@ -15,6 +16,7 @@ enum layers {
 
 #define LOWSPC LT(_LOWER, KC_SPC)
 #define RAISPC LT(_RAISE, KC_ENT)
+#define MOUBSPC LT(_MOUSE, KC_BSPC)
 #define ALTESC LALT_T(KC_ESC)
 #define CTLESC LCTL_T(KC_ESC)
 #define EURO ALGR(KC_U)
@@ -22,8 +24,20 @@ enum layers {
 #define RDESKT LWIN(LCTL(KC_RIGHT)) // Windows right Desktop
 #define WINMAN LCTL(LSFT(KC_ESC))   // Windows manager
 #define WINCAP LGUI_T(KC_CAPS)
-#define SHFTBSPC RSFT_T(KC_BSPC)
+//#define SHFTBSPC RSFT_T(KC_BSPC)
 #define SHFTAB RSFT_T(KC_TAB)
+
+// Left-hand home row mods
+#define GUI_A LGUI_T(KC_A)
+#define ALT_S LALT_T(KC_S)
+#define SFT_D LSFT_T(KC_D)
+#define CTL_F LCTL_T(KC_F)
+
+// Right-hand home row mods
+#define CTL_J RCTL_T(KC_J)
+#define SFT_K RSFT_T(KC_K)
+#define ALT_L LALT_T(KC_L)
+#define GUI_SCLN RGUI_T(KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -32,22 +46,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    │ Q W E R T Y │
    ╰─────────────╯
    ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮            ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
-   │   TAB   │    Q    │    W    │    E    │    R    │    T    │ ╭╮╭╮╭╮╭╮╭╮ │    Y    │    U    │    I    │    O    │    P    │   BSPC  │
+   │   TAB   │    Q    │    W    │    E    │    R    │    T    │ ╭╮╭╮╭╮╭╮╭╮ │    Y    │    U    │    I    │    O    │    P    │  BSPC   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │   LEAD  │    A    │    S    │    D    │    F    │    G    ├─╯        ╰─┤    H    │    J    │    K    │    L    │    ;    │    '    │
+   │  LEAD   │    A    │    S    │    D    │    F    │    G    ├─╯        ╰─┤    H    │    J    │    K    │    L    │    ;    │    '    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤            ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │ ALT/ESC │    Z    │    X    │    C    │    V    │    B    │            │    N    │    M    │    ,    │    .    │    /    │   WIN   │
+   │ ALT/ESC │    Z    │    X    │    C    │    V    │    B    │            │    N    │    M    │    ,    │    .    │    /    │ CTLWIN  │
    ╰─────────┴─────────┴─────────┴────┬────┴────┬────┴────┬────┴────╮  ╭────┴────┬────┴────┬────┴────┬────┴─────────┴─────────┴─────────╯
-                                      │ CTL/ESC │ LOW/SPC │ SFT/TAB │  │SFT/BSPC │ RAI/ENT │  ALTGR  │  
-                                      ╰─────────┴─────────┴─────────╯  ╰─────────┴─────────┴─────────╯ */ 
+                                      │ CTL/ESC │ LOW/SPC │ SFT/TAB │  │MOU/BSPC │ RAI/ENT │  ALTGR  │  
+                                      ╰─────────┴─────────┴─────────╯  ╰─────────┴─────────┴─────────╯  
   [_QWERTY] = LAYOUT_split_3x6_3(
 // ╷         ╷         ╷         ╷         ╷         ╷         ╷            ╷         ╷         ╷         ╷         ╷         ╷         ╷
     KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                  KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
     KC_LEAD,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
-    ALTESC ,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                  KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, WINCAP,
+    ALTESC ,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                  KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, CTLWIN,
 //                                    ╷         ╷         ╷         ╷  ╷         ╷         ╷         ╷   
-                                       CTLESC,   LOWSPC,   SHFTAB,      SHFTBSPC, RAISPC,   KC_RALT
-
+                                       CTLESC,   LOWSPC,   SHFTAB,      MOUBSPC, RAISPC,   KC_RALT
+                                       */
+  [_QWERTY] = LAYOUT_split_3x6_3(
+// ╷         ╷         ╷         ╷         ╷         ╷         ╷            ╷         ╷         ╷         ╷         ╷         ╷         ╷
+    KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
+    KC_LEAD,  GUI_A,    ALT_S,    SFT_D,    CTL_F,    KC_G,                  KC_H,     CTL_J,    SFT_K,    ALT_L,    GUI_SCLN, KC_QUOT,
+    KC_ESC ,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                  KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RGUI,
+//                                    ╷         ╷         ╷         ╷  ╷         ╷         ╷         ╷   
+                                       KC_ESC,   LOWSPC,   KC_TAB,      MOUBSPC, RAISPC,   KC_RALT
   ),
   /*
    ╭───────────╮
@@ -110,6 +131,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_TOG,  RGB_HUI,  RGB_SAI,  RGB_VAI,  _______,  _______,               _______,  KC_F4,    KC_F5,    KC_F6,    KC_F11,   _______,
     RGB_MOD,  RGB_HUD,  RGB_SAD,  RGB_VAD,  _______,  _______,               _______,  KC_F1,    KC_F2,    KC_F3,    KC_F10,   _______,
 //                                    ╷         ╷         ╷         ╷  ╷         ╷         ╷         ╷             
+                                       _______,   _______,  _______,    _______,  _______,   _______
+  ),
+  /*
+   ╭───────────╮
+   │ M O U S E │
+   ╰───────────╯
+   ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮            ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+   │         │         │         │         │         │         │ ╭╮╭╮╭╮╭╮╭╮ │         │         │         │         │         │         │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │         │         │         │         │         │         ├─╯        ╰─┤         │         │         │         │         │         │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤            ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │         │         │         │         │         │         │            │         │         │         │         │         │         │
+   ╰─────────┴─────────┴─────────┴────┬────┴────┬────┴────┬────┴────╮  ╭────┴────┬────┴────┬────┴────┬────┴─────────┴─────────┴─────────╯
+                                      │         │         │         │  │         │         │         │  
+                                      ╰─────────┴─────────┴─────────╯  ╰─────────┴─────────┴─────────╯ */ 
+    [_MOUSE] = LAYOUT_split_3x6_3(
+// ╷         ╷         ╷         ╷         ╷         ╷         ╷            ╷         ╷         ╷         ╷         ╷         ╷         ╷
+    _______,  _______,  _______,  _______,  _______,  _______,               KC_BTN1,  KC_BTN2,  _______,  _______,  _______,  _______,
+    _______,  _______,  _______,  _______,  _______,  _______,               _______,  _______,  _______,  _______,  _______,  _______,
+    _______,  _______,  _______,  _______,  _______,  _______,               _______,  _______,  _______,  _______,  _______,  _______,
+                                 //   ╷         ╷         ╷         ╷  ╷         ╷         ╷         ╷             
                                        _______,   _______,  _______,     _______,  _______,   _______
   )
   /*
